@@ -10,16 +10,16 @@ const initState = {
   isAuthed: false
 }
 
-const login = (state=initState, action) => {
+const login = (state = initState, action) => {
   switch (action.type) {
-    
+
     case issueConstants.LOGIN:
       return {
         ...state,
         isAuthed: action.isAuthenticated,
         user: action.user
       }
-      case issueConstants.LOGOUT: 
+    case issueConstants.LOGOUT:
       return {
         ...state,
         ...initState,
@@ -43,7 +43,7 @@ const productDetail = (state = initState, action) => {
 }
 
 const feedbackDetail = (state = initState, action) => {
-  
+
   switch (action.type) {
     case issueConstants.FEEDBACK_DETAILS:
       return {
@@ -108,3 +108,17 @@ export default combineReducers({
   submitFeedback,
   productList
 });
+
+// 为什么要用combineReducers? 
+  // 因为要把多个reducer合并成一个reducer
+  // 为什么要合并成一个reducer?
+// reducer的作用是什么?
+  // reducer的作用是: 1. 初始化state, 2. 根据action.type, 返回新的state
+
+// combineReducers的返回值是什么?
+  // combineReducers的返回值是一个reducer
+  // 为什么要返回一个reducer?
+  // 因为要把多个reducer合并成一个reducer
+  // 如何使用reducer
+  // reducer的作用是: 1. 初始化state, 2. 根据action.type, 返回新的state
+  
