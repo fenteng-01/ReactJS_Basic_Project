@@ -8,16 +8,16 @@ import { loginAction } from '../actions/action';
 
 function Login(props) {
     const [isValid, setIsValid] = useState(false);
-    const [login, setLogin] = useState({username:"",password:""})
-    
+    const [login, setLogin] = useState({ username: "", password: "" });
+
     const onFnf = () => {
         alert("This functionality is yet to be implemented.")
     }
 
     const handleLoginChange = (e) => {
-		let tempLogin = Object.assign({}, login, {[e.target.name]: e.target.value});
-		setLogin(tempLogin);
-	}
+        let tempLogin = Object.assign({}, login, { [e.target.name]: e.target.value });
+        setLogin(tempLogin);
+    }
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -84,3 +84,14 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
+
+// handleLoginChange方法解释
+    // e.target是什么? 为什么要用e.target.name?
+    // e.target是一个对象，包含了事件的信息，比如事件的类型，事件的目标，事件的坐标等等
+    // e.target.name是事件的目标的name属性，这里是input的name属性，所以e.target.name就是input的name属性
+    // e.target是input标签吗？不是，e.target是input标签的父元素，也就是form标签
+    // 所以onChange事件是在form标签上触发的，而不是input标签上触发的
+    // 为什么要用e.target.name?
+    // 因为我们要根据input的name属性来确定是哪个input发生了变化，然后根据name属性来更新state
+    // 为什么要用e.target.value?
+    // 因为我们要根据input的value属性来确定input的值，然后根据value属性来更新state
