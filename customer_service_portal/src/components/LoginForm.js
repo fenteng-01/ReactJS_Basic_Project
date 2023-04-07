@@ -1,6 +1,7 @@
 import Login from './Login';
 
 function LoginForm(props) {
+    // props就是store里面的state
     return (
         <>
             <div>

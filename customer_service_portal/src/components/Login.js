@@ -21,6 +21,7 @@ function Login(props) {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        console.log('props',props);
         props.login(login);
     }
 
@@ -84,6 +85,11 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
+
+// 为什么connect(mapStateToProps, mapDispatchToProps)(Login)这样写？
+    // 因为我们要把store里面的state映射到Login组件的props里面
+    // 为什么要把store里面的state映射到Login组件的props里面？
+    // 因为我们要在Login组件里面使用store里面的state
 
 // handleLoginChange方法解释
     // e.target是什么? 为什么要用e.target.name?

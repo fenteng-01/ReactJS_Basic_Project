@@ -9,6 +9,7 @@ import ProductDetails from "./components/ProductDetails";
 const store = initStore();
 
 function App() {
+  console.log('App.store', store);
   return (
     <Provider store={store}>
       <BrowserRouter>
