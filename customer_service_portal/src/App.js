@@ -9,7 +9,6 @@ import ProductDetails from "./components/ProductDetails";
 const store = initStore();
 
 function App() {
-  console.log('App.store', store);
   return (
     <Provider store={store}>
       <BrowserRouter>
@@ -24,6 +23,15 @@ function App() {
 }
 
 export default App;
+
+
+
+
+
+
+
+
+
 
 // 这个App文件使用了哪些核心概念? 
   // Provider, BrowserRouter, Routes, Route, element, path, initStore

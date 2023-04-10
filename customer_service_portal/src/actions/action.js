@@ -13,9 +13,12 @@ export function loginAction(data) {
     axios.get('http://localhost:4000/users')
       .then((res) => {
         let value = res.data
+        // result 就是db.json里的'users'数组里的一个对象
         var result = value.find(val => val.username === data.username && val.password === data.password)
         if (result) {
           dispatch(loginMe(true, result.username))
+          // 怎么理解这里的dispatch?
+            // dispatch是一个函数,它的作用是把action发出去,这里的action是loginMe这个函数的返回值
         }
         else {
           dispatch(loginMe(false))
@@ -84,3 +87,5 @@ export function getFeedbackDetails(data) {
       .catch(err => dispatch(getFeedback(err)))
   }
 }
+
+// 这个文件的作用是把actionCreator和actionType联系起来

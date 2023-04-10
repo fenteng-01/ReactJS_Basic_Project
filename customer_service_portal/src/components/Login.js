@@ -6,6 +6,7 @@ import { Button, Form, Col, Row } from 'react-bootstrap';
 import '../css/style.css';
 import { loginAction } from '../actions/action';
 
+// 这个props哪里传来的? 从<Provider>传过来
 function Login(props) {
     const [isValid, setIsValid] = useState(false);
     const [login, setLogin] = useState({ username: "", password: "" });
@@ -21,7 +22,6 @@ function Login(props) {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log('props',props);
         props.login(login);
     }
 
@@ -72,6 +72,9 @@ function Login(props) {
         </>
     )
 }
+
+// state.login.isAuthed哪来的? 
+    // reducers/index.js的const login = (state = initState, action)里的case issueConstants.LOGIN:
 const mapStateToProps = (state) => {
     return {
         authState: state.login.isAuthed
@@ -80,24 +83,41 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
+        // 这个login是定义在了props里的
         login: (data) => dispatch(loginAction(data))
+        // 这个参数data从哪来?
+            // handleSubmit里的props.login(login)
     }
 };
 
+
+
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
 
-// 为什么connect(mapStateToProps, mapDispatchToProps)(Login)这样写？
-    // 因为我们要把store里面的state映射到Login组件的props里面
-    // 为什么要把store里面的state映射到Login组件的props里面？
-    // 因为我们要在Login组件里面使用store里面的state
 
-// handleLoginChange方法解释
-    // e.target是什么? 为什么要用e.target.name?
-    // e.target是一个对象，包含了事件的信息，比如事件的类型，事件的目标，事件的坐标等等
-    // e.target.name是事件的目标的name属性，这里是input的name属性，所以e.target.name就是input的name属性
-    // e.target是input标签吗？不是，e.target是input标签的父元素，也就是form标签
-    // 所以onChange事件是在form标签上触发的，而不是input标签上触发的
-    // 为什么要用e.target.name?
-    // 因为我们要根据input的name属性来确定是哪个input发生了变化，然后根据name属性来更新state
-    // 为什么要用e.target.value?
-    // 因为我们要根据input的value属性来确定input的值，然后根据value属性来更新state
+
+
+
+
+
+
+// connect(mapStateToProps, mapDispatchToProps)(Login)理解
+    // connect(mapStateToProps, mapDispatchToProps)是一个高阶函数
+    // connect(mapStateToProps, mapDispatchToProps)(Login)是一个函数
+        // 这个函数的参数是Login组件
+        // 这个函数的返回值是一个新的组件
+            // 这个新的组件的props里有mapStateToProps和mapDispatchToProps的返回值
+        // 这个新的组件的props里有Login组件的props
+            // 这个新的组件的props里有dispatch,state,history,location,match等
+
+// 我自己的理解
+    // connect(mapStateToProps, mapDispatchToProps)是一个高阶函数
+    // connect(mapStateToProps, mapDispatchToProps)(Login)是一个函数
+    // 这个函数的参数是Login组件
+    // 这个函数的返回值是一个新的组件
+    // 这个新的组件的props里有mapStateToProps和mapDispatchToProps的返回值
+    // 这个新的组件的props里有Login组件的props
+    // 这个新的组件的props里有dispatch,state,history,location,match等
+
+
+// props.login(login); // 是调用的reducers/index.js的const login = (state = initState, action)里的case issueConstants.LOGIN:
