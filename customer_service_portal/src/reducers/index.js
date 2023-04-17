@@ -11,17 +11,9 @@ const initState = {
 }
 
 // 哪个文件调用了这里的login?
-  // src/components/Login.js
-    // 是在这个文件的props.login(login)里面调用的吗?
-      // 不是, 是在这个文件的handleSubmit(event)里面调用的?
-        // handleSubmit函数里的props.login(login);是在哪里定义的?
-        // 怎么理解props.login？
-          // props.login是从<Provider>里传过来的吗?
-            // 不是, 是从connect()里传过来的
-
+  // src/components/Login.js调用了这里的login
+// action.type是在src/actions/action.js里的loginAction函数里定义的
 const login = (state = initState, action) => {
-  // action.type是什么?
-    // action.type是在src/actions/action.js里的loginAction函数里定义的
   switch (action.type) {
     case issueConstants.LOGIN:
       return {
@@ -91,12 +83,7 @@ const productList = handleAction(
   initState
 );
 
-// 如何理解这里的export const getLoginState = state => state.login;
-// 为什么要用export const getLoginState = state => state.login;
-  // 因为要把这个函数导出去
-  // 为什么要把这个函数导出去?
-  // 因为要在src/components/Login.js里面使用这个函数
-  
+// TODO: export const getLoginState = state => state.login;的作用?
 export const getLoginState = state => state.login;
 export const getProductState = state => state.productDetail.productDetail;
 export const getFeedbackDetailsState = state => state.feedbackDetail.feedbackDetail;

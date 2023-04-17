@@ -24,15 +24,6 @@ function App() {
 
 export default App;
 
-
-
-
-
-
-
-
-
-
 // 这个App文件使用了哪些核心概念? 
   // Provider, BrowserRouter, Routes, Route, element, path, initStore
 // 我理解完App.js文件后，接下来要看哪个文件? 

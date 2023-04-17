@@ -25,4 +25,5 @@ function LoginForm(props) {
         </>
     )
 }
+
 export default LoginForm;

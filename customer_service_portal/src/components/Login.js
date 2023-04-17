@@ -22,6 +22,7 @@ function Login(props) {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        // props.login是在下面mapDispatchToProps定义的, 用来调用loginAction函数
         props.login(login);
     }
 
@@ -83,14 +84,13 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        // 这个login是定义在了props里的
+        // 这个login是定义在了props里的,参数data从handleSubmit里的props.login(login)
+        // 为什么这里也要dispatch? 因为loginAction是一个函数, 要用dispatch来调用这个函数
+        // 再解释的详细点, loginAction是一个函数, 要用dispatch来调用这个函数, 这个函数的参数是data, data是从handleSubmit里的props.login(login)传过来的
+        // 这么做是为了什么? 因为这个函数是在reducers/index.js里定义的, 要用dispatch来调用这个函数
         login: (data) => dispatch(loginAction(data))
-        // 这个参数data从哪来?
-            // handleSubmit里的props.login(login)
     }
 };
-
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
 
