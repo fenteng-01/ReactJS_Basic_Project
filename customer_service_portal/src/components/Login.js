@@ -6,8 +6,8 @@ import { Button, Form, Col, Row } from 'react-bootstrap';
 import '../css/style.css';
 import { loginAction } from '../actions/action';
 
-// 这个props哪里传来的? 从<Provider>传过来
 function Login(props) {
+
     const [isValid, setIsValid] = useState(false);
     const [login, setLogin] = useState({ username: "", password: "" });
 
@@ -16,13 +16,13 @@ function Login(props) {
     }
 
     const handleLoginChange = (e) => {
-        let tempLogin = Object.assign({}, login, { [e.target.name]: e.target.value });
+        // let tempLogin = Object.assign({}, login, { [e.target.name]: e.target.value });
+        let tempLogin = { ...login, [e.target.name]: e.target.value}
         setLogin(tempLogin);
     }
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        // props.login是在下面mapDispatchToProps定义的, 用来调用loginAction函数
         props.login(login);
     }
 
@@ -73,9 +73,6 @@ function Login(props) {
         </>
     )
 }
-
-// state.login.isAuthed哪来的? 
-    // reducers/index.js的const login = (state = initState, action)里的case issueConstants.LOGIN:
 const mapStateToProps = (state) => {
     return {
         authState: state.login.isAuthed
@@ -84,40 +81,53 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        // 这个login是定义在了props里的,参数data从handleSubmit里的props.login(login)
-        // 为什么这里也要dispatch? 因为loginAction是一个函数, 要用dispatch来调用这个函数
-        // 再解释的详细点, loginAction是一个函数, 要用dispatch来调用这个函数, 这个函数的参数是data, data是从handleSubmit里的props.login(login)传过来的
-        // 这么做是为了什么? 因为这个函数是在reducers/index.js里定义的, 要用dispatch来调用这个函数
         login: (data) => dispatch(loginAction(data))
     }
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
 
+// TODO:
+// className={"panel-heading"} 和 className="panel-heading-left" 的区别是什么?
+    // className={"panel-heading"} 是把panel-heading这个字符串作为className的值
+    // className="panel-heading-left" 是把panel-heading-left这个字符串作为className的值
 
+// TODO:
+// <Form horizontal="true" onSubmit={handleSubmit}>
+    // horizontal="true" 这个属性是什么意思?
+        // horizontal="true" 是一个布尔值, 用来表示是否水平排列表单,如果为true, 则表单会水平排列, 如果为false, 则表单会垂直排列。
+        // 会受外层div的样式影响吗，如果会，那么这个属性有什么用? 
+            // 会受外层div的样式影响, 如果外层div的样式是水平排列, 则表单会水平排列, 如果外层div的样式是垂直排列, 则表单会垂直排列。
+// TODO:
+    // Form.Group使用react-bootstrap.
+    // 链接是: https://react-bootstrap.github.io/components/forms/#forms-form-group
+// Form.Control不需要value属性吗?
+    // Form.Control不需要value属性, 因为Form.Control是一个受控组件, 它的值是由state来控制的。
+// 为什么要使用Form.Group? 
+    // Form.Group是一个容器组件, 它的作用是把表单元素包裹起来, 使得表单元素之间有一定的间距。
+    // 一个Form.Group放置多个放置多个Form.Control写法.
+    // 需要注意的是，在包含多个表单控件的情况下，我们应该始终为每个表单控件设置唯一的 id 属性，并将 id 属性与 Form.Label 和 Form.Control 组件的 htmlFor 和 id 属性配对。
+    // 这样做的好处是可以提高表单控件的可访问性和可维护性。例如：
+        // <Form.Group controlId="formBasicName">
+        //     <Form.Label htmlFor="firstName">First Name</Form.Label>
+        //     <Form.Control type="text" id="firstName" placeholder="First Name" />
+        //     <Form.Label htmlFor="lastName">Last Name</Form.Label>
+        //     <Form.Control type="text" id="lastName" placeholder="Last Name" />
+        // </Form.Group>
 
+// className="input-lg" 是什么意思?
+    // className="input-lg" 是把input-lg这个字符串作为className的值。
+    // 会有什么样的效果?
+        // 会使得表单元素的高度变大。
 
+// TODO:
+// <Col sm={12}> 和 <Col sm={4}> 的区别是什么?
+    // <Col sm={12}> 是把sm这个属性的值设置为12, 表示在屏幕宽度小于等于576px时, 该Col组件占据12个单位的宽度。
+    // <Col sm={4}> 是把sm这个属性的值设置为4, 表示在屏幕宽度小于等于576px时, 该Col组件占据4个单位的宽度。
+// TODO:
+// className="ml1 ms-4" 是什么意思?
+    // className="ml1 ms-4" 是把ml1和ms-4这两个字符串作为className的值。
+    // ml1是margin-left的缩写, ms-4是margin-start的缩写。
+        // margin-left: 0.25rem;
+        // margin-start: 1rem;
 
-
-
-
-// connect(mapStateToProps, mapDispatchToProps)(Login)理解
-    // connect(mapStateToProps, mapDispatchToProps)是一个高阶函数
-    // connect(mapStateToProps, mapDispatchToProps)(Login)是一个函数
-        // 这个函数的参数是Login组件
-        // 这个函数的返回值是一个新的组件
-            // 这个新的组件的props里有mapStateToProps和mapDispatchToProps的返回值
-        // 这个新的组件的props里有Login组件的props
-            // 这个新的组件的props里有dispatch,state,history,location,match等
-
-// 我自己的理解
-    // connect(mapStateToProps, mapDispatchToProps)是一个高阶函数
-    // connect(mapStateToProps, mapDispatchToProps)(Login)是一个函数
-    // 这个函数的参数是Login组件
-    // 这个函数的返回值是一个新的组件
-    // 这个新的组件的props里有mapStateToProps和mapDispatchToProps的返回值
-    // 这个新的组件的props里有Login组件的props
-    // 这个新的组件的props里有dispatch,state,history,location,match等
-
-
-// props.login(login); // 是调用的reducers/index.js的const login = (state = initState, action)里的case issueConstants.LOGIN:

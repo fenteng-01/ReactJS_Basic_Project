@@ -12,8 +12,10 @@ export const getPurchasedItems = createAction(issueConstants.PURCHASED_ITEMS);
 export const getFeedback = createAction(issueConstants.FEEDBACK_DETAILS);
 
 // 怎么理解这里的return dispatch => { ... }?
-// 这里的return dispatch => { ... }是一个函数,它的作用是把action发出去,这里的action是loginMe这个函数的返回值
-// 这里的loginMe是一个函数,它的作用是返回一个action
+  // 这里的return dispatch => { ... }是一个函数,它的作用是把action发出去,这里的action是loginMe这个函数的返回值
+  // 这里的loginMe是一个函数,它的作用是返回一个action
+  // 我们可以将这个过程比作一个传声筒，Redux 应用程序就像是一个房间，dispatch 函数就像是一个传声筒，
+  // 将组件中触发的 action 传递给 store 中的 reducer 函数
 export function loginAction(data) {
   return dispatch => {
     axios.get('http://localhost:4000/users')
