@@ -73,6 +73,7 @@ function Login(props) {
         </>
     )
 }
+
 const mapStateToProps = (state) => {
     return {
         authState: state.login.isAuthed
@@ -87,18 +88,17 @@ const mapDispatchToProps = (dispatch) => {
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
 
-// TODO:
 // className={"panel-heading"} 和 className="panel-heading-left" 的区别是什么?
     // className={"panel-heading"} 是把panel-heading这个字符串作为className的值
     // className="panel-heading-left" 是把panel-heading-left这个字符串作为className的值
 
-// TODO:
 // <Form horizontal="true" onSubmit={handleSubmit}>
     // horizontal="true" 这个属性是什么意思?
         // horizontal="true" 是一个布尔值, 用来表示是否水平排列表单,如果为true, 则表单会水平排列, 如果为false, 则表单会垂直排列。
         // 会受外层div的样式影响吗，如果会，那么这个属性有什么用? 
             // 会受外层div的样式影响, 如果外层div的样式是水平排列, 则表单会水平排列, 如果外层div的样式是垂直排列, 则表单会垂直排列。
-// TODO:
+
+
     // Form.Group使用react-bootstrap.
     // 链接是: https://react-bootstrap.github.io/components/forms/#forms-form-group
 // Form.Control不需要value属性吗?
@@ -120,11 +120,10 @@ export default connect(mapStateToProps, mapDispatchToProps)(Login);
     // 会有什么样的效果?
         // 会使得表单元素的高度变大。
 
-// TODO:
 // <Col sm={12}> 和 <Col sm={4}> 的区别是什么?
     // <Col sm={12}> 是把sm这个属性的值设置为12, 表示在屏幕宽度小于等于576px时, 该Col组件占据12个单位的宽度。
     // <Col sm={4}> 是把sm这个属性的值设置为4, 表示在屏幕宽度小于等于576px时, 该Col组件占据4个单位的宽度。
-// TODO:
+
 // className="ml1 ms-4" 是什么意思?
     // className="ml1 ms-4" 是把ml1和ms-4这两个字符串作为className的值。
     // ml1是margin-left的缩写, ms-4是margin-start的缩写。

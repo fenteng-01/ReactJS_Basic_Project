@@ -36,12 +36,14 @@ function PurchasedItems(props) {
     );
 }
 
+// [Done]
 const mapStateToProps = (state) => {
     return {
         productList: getProductList(state)
     }
 };
 
+// [Analysing]
 const mapDispatchToProps = (dispatch) => {
     return {
         getProductList: () => dispatch(getPurchasedProductList())
